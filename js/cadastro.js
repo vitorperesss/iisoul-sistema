@@ -1,11 +1,13 @@
 $( document ).ready(function() {
     buscar_dados();
+    initSelect2NomeCompleto();
     $('#cep').mask('00000-000');
     $('#telefone').mask('(00) 0000-0000');
     $('#celular').mask('(00) 00000-0000');
     $('#cpf').mask('000.000.000-00', {reverse: true});
     $('#rg').mask('00.000.000-A', {reverse: true});
     $("#tb_pessoa_fisica").bootstrapTable({ locale: 'pt-br'})
+    
 });
 
 
@@ -15,11 +17,14 @@ function open_md_cadastro(){
 
 function buscar_dados(){
 
+    let nome_completo = $('#select2_nome_completo').val();
+
     $.ajax({
         type: "POST",
         url: 'rotinas/index.php',
         dataType:"json",
         data: {
+            nome_completo : nome_completo,
             acao  : btoa('buscar_dados')
         },
         success: function(response){
@@ -282,7 +287,6 @@ function editar(){
         success: function(response){
             if(response.status == true){
                 alert_page('Sucesso!', response.msg, 'success');
-                clean_form();
                 $('#md_editar_pessoa_fisica').modal('hide');
                 buscar_dados();
             }else{
@@ -363,6 +367,41 @@ function clean_form(){
     $('#cep').val('');
     $('#masculino').prop('checked', true);
 }
+
+
+
+function initSelect2NomeCompleto() {
+
+    $('#select2_nome_completo').select2({
+        language: "pt-BR",
+        ajax: {
+            type: "POST",
+            url: 'rotinas/index.php',
+            dataType: "json",
+            data: function (params) {
+                return {
+                    acao: btoa('buscar_nome_completo'),
+                    filtro: params.term 
+                };
+            },
+            processResults: function (response) {
+                if(response.status == true){
+                    return {
+                        results: response.row
+                    };
+                }else{
+                    return{
+                        results: []
+                    }
+                }
+            },
+            cache:true
+        },
+        placeholder: 'Digite um nome',
+        minimumInputLength: 3
+    });
+}
+
 
 
 
