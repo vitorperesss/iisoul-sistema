@@ -6,9 +6,26 @@ $( document ).ready(function() {
     $('#celular').mask('(00) 00000-0000');
     $('#cpf').mask('000.000.000-00', {reverse: true});
     $('#rg').mask('00.000.000-A', {reverse: true});
-    $("#tb_pessoa_fisica").bootstrapTable({ locale: 'pt-br'})
+
+    $('#tb_pessoa_fisica').bootstrapTable({
+        locale: 'pt-br',
+        toolbar: '#toolbar', // ID do elemento que contém o botão
+    });
+
+    $('#exportar').click(function() {
+        $('#tb_pessoa_fisica').tableExport({
+            type: 'csv',  // Pode ser 'csv', 'txt', 'excel' ou 'json'
+            fileName: 'tabela pessoa física',
+            exportOptions: {
+                ignoreColumn: []  // Colunas a serem ignoradas na exportação
+            },
+            csvSeparator: ';' 
+        });
+    });
     
 });
+
+
 
 
 function open_md_cadastro(){
@@ -17,14 +34,15 @@ function open_md_cadastro(){
 
 function buscar_dados(){
 
-    let nome_completo = $('#select2_nome_completo').val();
+    let nome_completo           = $('#select2_nome_completo').val();
+
 
     $.ajax({
         type: "POST",
         url: 'rotinas/index.php',
         dataType:"json",
         data: {
-            nome_completo : nome_completo,
+            nome_completo : nome_completo
             acao  : btoa('buscar_dados')
         },
         success: function(response){
@@ -367,8 +385,6 @@ function clean_form(){
     $('#cep').val('');
     $('#masculino').prop('checked', true);
 }
-
-
 
 function initSelect2NomeCompleto() {
 

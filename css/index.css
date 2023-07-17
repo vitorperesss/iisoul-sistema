@@ -1,0 +1,39 @@
+#content-wrapper{
+    margin: 1%;
+}
+h4 {
+    margin-top: 1%;
+}
+.form-group{
+    margin-top: 2%;
+}
+.navbar{
+    margin-bottom: 2%;
+}
+/*div de filtros do datatables*/
+.filter_datatables{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+/*margem dos botões de buscar do datatables*/
+.btn_buscar{
+    margin-top: 7%;
+}
+/*altura dos selects2*/
+.select2-selection{
+    height: 36px!important;
+}
+.select2-selection__rendered{
+    padding-top: 0.5%!important;
+}
+.select2-container{
+    margin-top: 0.4px;
+}
+/*botão exportar datatables*/
+.bs-bars{
+    float: right!important;
+    margin-left: 5px!important;
+}
+.btn-secondary{
+    background-color: black!important;
+}

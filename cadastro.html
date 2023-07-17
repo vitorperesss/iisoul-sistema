@@ -1,25 +1,37 @@
     
    <link href="css/cadastro.css" rel="stylesheet">
+
+   <div class="filter_datatables">
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <span>Nome Completo</span>
+                    <select type="text" name="select2_nome_completo" id="select2_nome_completo" class="select2 form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+  
+            <div class="col-3">
+                <button onclick="buscar_dados()" type="button" class="btn btn-dark btn_buscar">Buscar</button>
+            </div>
+        </div>
+   </div>
    
-    <div class="row">
-        <div class="col-3">
-        <div class="form-group">
-            <select type="text" name="select2_nome_completo" id="select2_nome_completo" class="form-control"></select>
-        </div>
-        </div>
-        <div class="col-3">
-            <button onclick="buscar_dados()" type="button" class="btn btn-light">Buscar</button>
-        </div>
-    </div>
+  
 
     <div class="row">
-        <div class="col-12">
-        <button onclick="open_md_cadastro()" type="button" class="btn btn-dark">Adicionar</button>
+        <div class="col-2">
+            <button onclick="open_md_cadastro()" type="button" class="btn btn-dark">Adicionar</button>
         </div>
     </div>
 
     <div id="table" class="row">
         <div class="col-12">
+            <div id="toolbar">
+                <button   button id="exportar" class="btn btn-dark"><i class="bi bi-cloud-arrow-down"></i></button>
+            </div>
+      
         <table  id="tb_pessoa_fisica" 
                 class="table table-bordered" 
                 width="100%" 
@@ -36,7 +48,8 @@
                 data-show-search-clear-button="true"
                 data-show-refresh="false"
                 data-row-style="row_style_table_pessoa_fisica"
-                data-show-export="true">
+                data-show-export="true"
+                data-export-data-type="all">
             <thead>
             <tr>
                 <th data-field="id_cadastro" >#</th>

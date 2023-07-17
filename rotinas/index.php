@@ -377,10 +377,9 @@ function buscar_dados($conexao)
         define('msg', 'msg');
         define('row', 'row');
 
-        $id                 = $_POST['id'];
-        $id_nome_completo   = $_POST['nome_completo'];
+        $id                         = $_POST['id'];
+        $id_nome_completo           = $_POST['nome_completo'];
 
-        
 
         if($id > 0 ){
             $clausula = " AND id_cadastro = $id";
@@ -391,6 +390,7 @@ function buscar_dados($conexao)
         if($id_nome_completo != ''){
             $clausula = " AND id_cadastro = '$id_nome_completo'";
         }
+
 
         $sql = "SELECT * FROM public.cadastro WHERE situacao = 1 $clausula";
         $resultado = mysqli_query($conexao, $sql);
